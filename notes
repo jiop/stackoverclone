@@ -10,3 +10,8 @@ rails g devise:install
 rails g devise User
 rails db:migrate
 rails g devise:views:foundation_templates
+
+# Annotate
+rails g annotate:install
+annotate
+annotate --routes
