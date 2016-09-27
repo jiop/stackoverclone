@@ -1,0 +1,14 @@
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+<p>
+  <strong>Body:</strong>
+  <%= @question.body %>
+</p>
+<p><strong>User:</strong> <%= @question.user.email %></p>
+
+<%= link_to t('edit_question'), edit_question_path(@question) %>
+<%= link_to t('delete_question'), question_path(@question), method: :delete %>
+
+<%= link_to 'Back', questions_path %>

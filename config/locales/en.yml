@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  title: "StackOverclone"
+  sign_in: "Sign in"
+  sign_up: "Sign up"
+  logout: "Logout"
+  new_answer: "Answer this question"

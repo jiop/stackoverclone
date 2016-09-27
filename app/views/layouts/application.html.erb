@@ -4,16 +4,45 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : t('title') %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-
-    <%= yield %>
-
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li><a class="menu-text" href="/"><%= t('title') %></a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <% if user_signed_in? %>
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li>
+              <%= link_to(current_user.email, edit_user_registration_path(current_user)) %>
+              <ul class="menu">
+                <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="menu">
+            <li><%= link_to t('sign_in'), new_user_session_path %></li>
+            <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+    <%= display_flash_messages %>
+    <div class="row">
+      <div class="small-9 small-centered columns">
+        <%= yield %>
+      </div>
+    </div>
+    </div>
   </body>
 </html>
