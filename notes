@@ -15,3 +15,6 @@ rails g devise:views:foundation_templates
 rails g annotate:install
 annotate
 annotate --routes
+
+# Rails Footnotes
+rails generate rails_footnotes:install

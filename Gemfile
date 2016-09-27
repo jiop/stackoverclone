@@ -45,6 +45,7 @@ group :development do
 
   gem 'annotate'
   gem 'guard-rspec', require: false
+  gem 'rails-footnotes', '~> 4.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
