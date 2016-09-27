@@ -54,3 +54,6 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
 end
+
+gem 'foundation-rails'
+gem 'foundation_rails_helper', git: 'https://github.com/sgruhier/foundation_rails_helper.git' # till the 3.0.0 version release

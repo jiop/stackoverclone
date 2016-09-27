@@ -1,2 +1,4 @@
 rails generate rspec:install
 bundle exec guard init rspec
+
+rails g foundation:install
