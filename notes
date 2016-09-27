@@ -1,4 +1,12 @@
+# RSpec
 rails generate rspec:install
 bundle exec guard init rspec
 
+# Foundation
 rails g foundation:install
+
+# Devise
+rails g devise:install
+rails g devise User
+rails db:migrate
+rails g devise:views:foundation_templates
