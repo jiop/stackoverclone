@@ -29,4 +29,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :questions, dependent: :nullify
+
+  def to_s
+    self.email
+  end
 end
