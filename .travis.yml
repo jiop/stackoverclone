@@ -7,3 +7,6 @@ script:
   - bundle exec rails db:setup
   - bundle exec rspec
 cache: bundler
+addons:
+  code_climate:
+    repo_token: d9e823041f81b17d1a2d83c860bf93ba89e68d3776ddf1ec1958569c7a708cf0

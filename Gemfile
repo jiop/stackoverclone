@@ -62,3 +62,5 @@ gem 'foundation_rails_helper', git: 'https://github.com/sgruhier/foundation_rail
 
 gem 'devise'
 gem 'devise-foundation-views'
+
+gem "codeclimate-test-reporter", group: :test, require: nil
