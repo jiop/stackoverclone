@@ -31,6 +31,6 @@ class User < ApplicationRecord
   has_many :questions, dependent: :nullify
 
   def to_s
-    self.email
+    email
   end
 end

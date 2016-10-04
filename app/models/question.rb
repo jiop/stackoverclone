@@ -14,6 +14,7 @@
 #  index_questions_on_user_id  (user_id)
 #
 
+# Question class handles validity and storage for Questions
 class Question < ApplicationRecord
   belongs_to :user
 
