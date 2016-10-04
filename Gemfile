@@ -45,6 +45,7 @@ group :development do
 
   gem 'annotate'
   gem 'guard-rspec', require: false
+  gem 'guard-rubocop'
   gem 'rails-footnotes', '~> 4.0'
 end
 
@@ -55,6 +56,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'rubocop', require: false
 end
 
 gem 'foundation-rails'

@@ -1,0 +1,15 @@
+Rails:
+  Enabled: true
+Documentation:
+  Enabled: false
+LineLength:
+  Enabled: false
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/

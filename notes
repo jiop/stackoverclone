@@ -19,7 +19,12 @@ annotate --routes
 # Rails Footnotes
 rails generate rails_footnotes:install
 
-
 # Add Questions
 rails g scaffold Questions body:text title user:references
 rails db:migrate
+
+# Add Guard Rspec
+bundle exec guard init rspec
+
+# Add rubocop to guard file
+guard init rubocop
