@@ -4,7 +4,7 @@ rvm:
   - 2.2.4
 bundler_args: --jobs=2
 script:
-  - bundle exec rails db:setup
+  - bundle exec rails db:migrate
   - bundle exec rspec
 cache: bundler
 addons:
