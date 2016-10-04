@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:user) { User.new(email: 'test@test.test', password: 'testtest', password_confirmation: 'testtest') }
-
   let(:user2) { User.create!(email: 'test2@test.test', password: 'testtest', password_confirmation: 'testtest') }
-  let(:valid_attributes) { { body: 'body', title: 'title', user: user } }
-  let(:invalid_attributes) { { body: 'body', title: nil, user: user } }
   let(:question) { Question.create!(body: 'body', user: user, title: 'title') }
+
+  let(:valid_question_attributes) { { user: user, body: 'text', title: 'title' } }
+  let(:invalid_question_attributes) { Hash.new }
 
   context 'with logged user' do
     before do
@@ -21,7 +21,6 @@ RSpec.describe QuestionsController, type: :controller do
       it { is_expected.to render_template :index }
 
       it 'assigns all questions as @questions' do
-        question = Question.create! valid_attributes
         sign_in user
         get :index, params: {}
         expect(assigns(:questions)).to eq([question])
@@ -36,7 +35,6 @@ RSpec.describe QuestionsController, type: :controller do
       it { is_expected.to render_template :show }
 
       it 'assigns the requested question as @question' do
-        question = Question.create! valid_attributes
         sign_in user
         get :show, params: { id: question.to_param }
         expect(assigns(:question)).to eq(question)
@@ -68,7 +66,6 @@ RSpec.describe QuestionsController, type: :controller do
       it { is_expected.to render_template :edit }
 
       it 'assigns the requested question as @question' do
-        question = Question.create! valid_attributes
         sign_in user
         get :edit, params: { id: question.to_param }
         expect(assigns(:question)).to eq(question)
@@ -83,34 +80,20 @@ RSpec.describe QuestionsController, type: :controller do
       context 'with valid params' do
         it 'creates a new Question' do
           sign_in user
-          expect { post :create, params: { question: valid_attributes } }.to change(Question, :count).by(1)
+          expect { post :create, params: { question: valid_question_attributes } }.to change(Question, :count).by(1)
         end
 
         it 'assigns a newly created question as @question' do
           sign_in user
-          post :create, params: { question: valid_attributes }
+          post :create, params: { question: valid_question_attributes }
           expect(assigns(:question)).to be_a(Question)
           expect(assigns(:question)).to be_persisted
         end
 
         it 'redirects to the created question' do
           sign_in user
-          post :create, params: { question: valid_attributes }
+          post :create, params: { question: valid_question_attributes }
           expect(response).to redirect_to(Question.last)
-        end
-      end
-
-      context 'with invalid params' do
-        it 'assigns a newly created but unsaved question as @question' do
-          sign_in user
-          post :create, params: { question: invalid_attributes }
-          expect(assigns(:question)).to be_a_new(Question)
-        end
-
-        it 're-renders the "new" template' do
-          sign_in user
-          post :create, params: { question: invalid_attributes }
-          expect(response).to render_template('new')
         end
       end
     end
@@ -129,7 +112,6 @@ RSpec.describe QuestionsController, type: :controller do
         end
 
         it 'updates the requested question' do
-          question = Question.create! valid_attributes
           sign_in user
           put :update, params: { id: question.to_param, question: new_attributes }
           question.reload
@@ -137,33 +119,15 @@ RSpec.describe QuestionsController, type: :controller do
         end
 
         it 'assigns the requested question as @question' do
-          question = Question.create! valid_attributes
           sign_in user
-          put :update, params: { id: question.to_param, question: valid_attributes }
+          put :update, params: { id: question.to_param, question: valid_question_attributes }
           expect(assigns(:question)).to eq(question)
         end
 
         it 'redirects to the question' do
-          question = Question.create! valid_attributes
           sign_in user
-          put :update, params: { id: question.to_param, question: valid_attributes }
+          put :update, params: { id: question.to_param, question: valid_question_attributes }
           expect(response).to redirect_to(question)
-        end
-      end
-
-      context 'with invalid params' do
-        it 'assigns the question as @question' do
-          question = Question.create! valid_attributes
-          sign_in user
-          put :update, params: { id: question.to_param, question: invalid_attributes }
-          expect(assigns(:question)).to eq(question)
-        end
-
-        it 're-renders the "edit" template' do
-          question = Question.create! valid_attributes
-          sign_in user
-          put :update, params: { id: question.to_param, question: invalid_attributes }
-          expect(response).to render_template('edit')
         end
       end
     end
@@ -177,17 +141,17 @@ RSpec.describe QuestionsController, type: :controller do
       it 'displays a success flash message'
 
       it 'destroys the requested question' do
-        question = Question.create! valid_attributes
+        question1 = Question.create!(valid_question_attributes)
         sign_in user
         expect do
-          delete :destroy, params: { id: question.to_param }
+          delete :destroy, params: { id: question1.id }
         end.to change(Question, :count).by(-1)
       end
 
       it 'redirects to the questions list' do
-        question = Question.create! valid_attributes
+        question2 = Question.create!(valid_question_attributes)
         sign_in user
-        delete :destroy, params: { id: question.to_param }
+        delete :destroy, params: { id: question2.id }
         expect(response).to redirect_to(questions_url)
       end
     end
