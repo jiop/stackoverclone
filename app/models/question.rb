@@ -18,6 +18,8 @@
 class Question < ApplicationRecord
   belongs_to :user
 
+  has_many :answers
+
   validates :body, presence: true, allow_blank: false
   validates :title, presence: true, allow_blank: false
 end

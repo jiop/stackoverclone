@@ -28,3 +28,6 @@ bundle exec guard init rspec
 
 # Add rubocop to guard file
 guard init rubocop
+
+# Add Answers
+rails g scaffold Answers body:text user:references question:references
