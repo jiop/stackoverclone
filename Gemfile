@@ -47,6 +47,8 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
   gem 'rails-footnotes', '~> 4.0'
+
+  gem 'brakeman', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
